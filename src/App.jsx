@@ -9,13 +9,18 @@ export default class App extends Component {
   constructor() {
     super()
     this.state = {
+      id: null,
       inventory: []
     }
+  }
+  
+  componentDidMount() { // this runs after constructor and render
+    this.getInventory()
   }
 
   getInventory = () => {
     axios
-      .post('/api/inventory/')
+      .get('/api/inventory/')
       .then(res => {
         this.setState({ inventory: res.data })
       })
@@ -23,12 +28,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { imgurl, productName, price } = this.state.inventory
+    const { inventory } = this.state
     return (
-      <div className="App">
+      <div className='App'>
         <Header />
-        <Dashboard imgurl={imgurl} name={productName} price={price} inventory={this.state.inventory} />
-        <Form />
+        <div className='body-wrap'>
+          <Dashboard inventory={inventory} />
+          <Form getInventory={this.getInventory} />
+        </div>
       </div>
     );
   }

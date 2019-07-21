@@ -7,8 +7,20 @@ nav {
 
 .app {
   display: flex;
-  flex-direction: row;
+}
+
+.body-wrap {
+  padding: 15px 0 0 75px; 
+  display: flex;
   justify-content: space-around;
+}
+
+.imgurl {
+  text-overflow: ellipsis;
+}
+
+.dashboard {
+  width: 500px;
 }
 
 .logo {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 
 export default class Form extends Component {
   constructor() {
     super()
     this.state = {
-      name: '',
-      price: 0,
+      productname: '',
+      price: '',
       imgurl: ''
     }
     this.baseState = this.state
@@ -18,29 +18,38 @@ export default class Form extends Component {
     this.setState({ [name]: value })
   }
 
-  cancelInput = (e) => {
-    this.setState(this.baseState)
+  cancelInput = () => {
+    console.log(this.baseState)
+    this.setState( this.baseState )
+  }
+
+  addProduct = () => {
+    const { imgurl, productname, price } = this.state
+    axios
+      .post('/api/product/', { imgurl, productname, price })
+      .catch((err) => console.log(err))
   }
 
   render() {
+    const { imgurl, productname, price } = this.state
     const { handleInputChange } = this
     return (
       <div>
-        <form>
+        <div>
           <div><img src="https://via.placeholder.com/350x250" alt=""/></div>
           <div className='input-group'>
             <p>Image URL:</p>
-            <input name='name' onChange={handleInputChange} type="text"/>
+            <input name='imgurl' value={imgurl} onChange={handleInputChange} type="text"/>
             <p>Product Name:</p>
-            <input name='price' onChange={handleInputChange} type="text"/>
+            <input name='name' value={productname} onChange={handleInputChange} type="text"/>
             <p>Price:</p>
-            <input name='imgurl' onChange={handleInputChange} type="text"/>
+            <input name='price' value={price} onChange={handleInputChange} type="number"/>
           </div>
           <div>
             <button onClick={this.cancelInput}>Cancel</button>
-            <button>Add to Inventory</button>
+            <button onClick={this.props.getInventory}>Add to Inventory</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

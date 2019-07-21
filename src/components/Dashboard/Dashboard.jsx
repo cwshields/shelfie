@@ -3,12 +3,13 @@ import Product from '../Product/Product'
 
 const Dashboard = (props) => {
   let viewInventory = props.inventory.map( (product) => {
+    const { imgurl, productname, price, id } = product
     return (
-      <Product key={product.id}/>
+      <Product imgurl={imgurl} name={productname} price={price} key={id}/>
     )
   })
   return (
-    <div>
+    <div className='dashboard'>
       {viewInventory}
     </div>
   )

@@ -16,5 +16,6 @@ massive(CONNECTION_STRING)
 }).catch(e => console.log(e))
 
 app.get('/api/inventory/', controller.getInventory)
+app.post('/api/product/', controller.addProduct)
 
 app.listen(SERVER_PORT, () => console.log('Listening on Port ' + SERVER_PORT))
