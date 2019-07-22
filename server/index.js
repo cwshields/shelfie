@@ -17,5 +17,7 @@ massive(CONNECTION_STRING)
 
 app.get('/api/inventory/', controller.getInventory)
 app.post('/api/product/', controller.addProduct)
+app.delete('/api/product/:product_id', controller.deleteProduct)
+app.put('/api/product/:id', controller.editProduct)
 
 app.listen(SERVER_PORT, () => console.log('Listening on Port ' + SERVER_PORT))

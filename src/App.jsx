@@ -10,7 +10,8 @@ export default class App extends Component {
     super()
     this.state = {
       id: null,
-      inventory: []
+      inventory: [],
+      editing: false
     }
   }
   
@@ -26,15 +27,27 @@ export default class App extends Component {
       })
       .catch(error => console.log(error))
   }
+  
+  toggleEdit = () => {
+    const { editing } = this.state
+    editing === false ? this.setState({ editing: true }) : this.setState({ editing: false })
+    this.getInventory()
+  }
+  
+  deleteProduct = (product_id) => {
+    axios
+      .delete(`/api/product/${product_id}`)
+      .catch(err => console.log(err))
+  }
 
   render() {
-    const { inventory } = this.state
+    const { editing, inventory } = this.state
     return (
       <div className='App'>
         <Header />
         <div className='body-wrap'>
-          <Dashboard inventory={inventory} />
-          <Form getInventory={this.getInventory} />
+          <Dashboard deleteProduct={this.deleteProduct} toggleEdit={this.toggleEdit} inventory={inventory} />
+          <Form editing={editing} getInventory={this.getInventory} />
         </div>
       </div>
     );

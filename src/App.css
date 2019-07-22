@@ -5,6 +5,31 @@ nav {
   height: 100px;
 }
 
+p {
+  margin: 0;
+}
+
+input {
+  margin-bottom: 15px;
+}
+
+button {
+  width: 120px;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-left: 75px;
+}
+
+.company-name {
+  color: white;
+  font-weight: 500;
+  margin-left: 18px;
+  font-size: 30px;
+}
+
 .app {
   display: flex;
 }
@@ -20,18 +45,10 @@ nav {
 }
 
 .dashboard {
-  width: 500px;
+  width: 670px;
 }
 
-.logo {
-  width: 60px;
-  height: 60px;
-  margin-left: 75px;
-}
-
-.company-name {
-  color: white;
-  font-weight: 500;
-  margin-left: 18px;
-  font-size: 30px;
+.btn-group {
+  display: flex;
+  justify-content: space-between;
 }
