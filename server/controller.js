@@ -28,7 +28,20 @@ const addProduct = (req, res, next) => {
 
   dbInstance
     .create_product([ imgurl, productname, price ])
-    .then( inventory => res.sendStatus(200).send(inventory) )
+    .then( inventory => res.sendStatus(200).json(inventory) )
+    .catch( err => {
+      res.status(500).send({errorMessage: "There was an error!"})
+      console.log(err);
+    })
+}
+
+const addTestProducts = (req, res, next) => {
+  const dbInstance = req.app.get('db')
+  const { imgurl, productname, price  } = req.body
+
+  dbInstance
+    .test_products([ imgurl, productname, price ])
+    .then( inventory => res.sendStatus(200).json(inventory) )
     .catch( err => {
       res.status(500).send({errorMessage: "There was an error!"})
       console.log(err);
@@ -37,10 +50,13 @@ const addProduct = (req, res, next) => {
 
 const deleteProduct = (req, res, next) => {
   const dbInstance = req.app.get('db')
+  const { product_id } = req.params
 
   dbInstance
-    .delete_product()
-    .then( () => res.status(200) )
+    .delete_product(product_id)
+    .then( inventory => {
+      res.status(200).json(inventory)
+    } )
     .catch( err => {
       res.status(500).send({errorMessage: "There was an error!"})
       console.log(err);
@@ -64,6 +80,7 @@ module.exports = {
   getInventory,
   getProduct,
   addProduct,
+  addTestProducts,
   deleteProduct,
-  // editProduct,
+  editProduct,
 }

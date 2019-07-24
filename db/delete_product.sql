@@ -1,1 +1,2 @@
-DELETE FROM product WHERE product_id = $4;
+DELETE FROM product WHERE product_id = $1;
+SELECT * FROM product;
