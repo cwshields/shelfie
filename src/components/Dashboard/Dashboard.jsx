@@ -1,3 +1,4 @@
+
 import Product from '../Product/Product'
 import React, { Component } from 'react'
 import Form from '../Form/Form'
@@ -7,6 +8,7 @@ export default class Dashboard extends Component {
   constructor() {
     super()
     this.state = {
+      product_id: null,
       inventory: [],
       editing: false
     }
@@ -25,6 +27,12 @@ export default class Dashboard extends Component {
       .catch(error => console.log(error))
   }
  
+  getProduct = () => {
+    axios
+      .get('/api/product/:id')
+      .catch((err) => console.log(err));
+  }
+  
   deleteProduct = (product_id) => {
     axios
       .delete(`/api/product/${product_id}`)

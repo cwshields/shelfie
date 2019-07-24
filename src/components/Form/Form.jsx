@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -49,7 +50,7 @@ export default class Form extends Component {
       <div className='form-container' toggleEdit={toggleEdit}>
         <div className='imgurl-wrap'>
           {imgurl === '' ? <img src="https://via.placeholder.com/350x250" alt="" />
-            : <img src={this.state.imgurl} alt="" />}
+            : <img src={imgurl} alt="" />}
         </div>
         <div className='input-group'>
           <p>Image URL:</p>
@@ -61,8 +62,8 @@ export default class Form extends Component {
         </div>
         <div className='btn-group'>
           <button onClick={this.cancelInput}>Cancel</button>
-          {editing === false ? <button onClick={this.addProduct}>Add to Inventory</button>
-            : <button /*onClick={}*/>Save Changes</button>}
+          { editing === false ? <button onClick={this.addProduct}>Add to Inventory</button>
+                              : <button /*onClick={}*/>Save Changes</button> }
         </div>
         <div className='test-product-btn flex-center'><button onClick={this.addTestProducts}>TEST PRODUCTS</button></div>
       </div>

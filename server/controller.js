@@ -10,7 +10,7 @@ const getInventory = (req, res, next) => {
     })
 }
 
-const getProduct = () => {
+const getProduct = (req, res, next) => {
   const dbInstance = req.app.get('db')
   const { id } = req.params
   
