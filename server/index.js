@@ -2,6 +2,7 @@ const express = require('express')
 const massive = require('massive')
 const {
   getInventory,
+  getProduct,
   addProduct,
   addTestProducts,
   deleteProduct,
@@ -25,6 +26,7 @@ massive(CONNECTION_STRING)
   }).catch(e => console.log(e))
 
 app.get('/api/inventory/', getInventory)
+app.get('/api/product/:id', getProduct)
 app.post('/api/product/', addProduct)
 app.post('/api/products/', addTestProducts)
 app.delete('/api/product/:product_id', deleteProduct)
