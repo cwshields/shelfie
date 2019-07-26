@@ -38,6 +38,12 @@ button {
   font-size: 30px;
 }
 
+.btn-wrap {}
+
+.btn {
+  margin-left: 24px;
+}
+
 .app {
   display: flex;
 }

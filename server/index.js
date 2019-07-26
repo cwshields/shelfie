@@ -1,4 +1,6 @@
 const massive = require('massive')
+const express = require('express')
+
 const {
   getInventory,
   getProduct,

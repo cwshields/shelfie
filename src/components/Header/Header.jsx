@@ -7,7 +7,11 @@ export default class Header extends Component {
       <div>
         <nav>
           <img className='logo' src={logo} alt="Logo"/>
-          <div className='company-name'>SHELFIE</div>
+          <div className='company-name'>shelfie</div>
+          <div className='btn-wrap'>
+            <button className='btn'>Home</button>
+            <button className='btn'>Add Item</button>
+          </div>
         </nav>
       </div>
     )

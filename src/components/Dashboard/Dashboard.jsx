@@ -10,7 +10,8 @@ export default class Dashboard extends Component {
     this.state = {
       product_id: null,
       inventory: [],
-      editing: false
+      editing: false,
+      currentProduct: {} 
     }
   }
 
@@ -26,13 +27,13 @@ export default class Dashboard extends Component {
       })
       .catch(error => console.log(error))
   }
- 
+
   getProduct = () => {
     axios
       .get('/api/product/:id')
       .catch((err) => console.log(err));
   }
-  
+
   deleteProduct = (product_id) => {
     axios
       .delete(`/api/product/${product_id}`)
@@ -41,11 +42,11 @@ export default class Dashboard extends Component {
       })
       .catch(err => console.log(err))
   }
-  
-  toggleEdit = () => {
+
+  toggleEdit = (product) => {
     const { editing } = this.state
-    editing === false ? this.setState({ editing: true }) : this.setState({ editing: false })
-    this.getInventory()
+    this.form_ref.cancelInput();
+    this.setState({ editing: !editing, currentProduct: product })
   }
 
   render() {
@@ -53,15 +54,26 @@ export default class Dashboard extends Component {
       const { imgurl, productname, price, product_id } = product
       return (
         <div key={product_id}>
-          <Product deleteProduct={this.deleteProduct} toggleEdit={this.toggleEdit}
-            imgurl={imgurl} productname={productname} price={price} productId={product_id} />
+          <Product 
+            deleteProduct={this.deleteProduct} 
+            toggleEdit={this.toggleEdit}
+            imgurl={imgurl} 
+            productname={productname} 
+            price={price} 
+            productId={product_id}
+            product={product} />
         </div>
       )
     })
     return (
       <div className='column-wrap'>
         <div className='form-wrap'>
-          <Form getInventory={this.getInventory} editing={this.state.editing} toggleEdit={this.toggleEdit} />
+          <Form 
+            ref={ref => this.form_ref = ref} // Research more about ref in react
+            getInventory={this.getInventory} 
+            editing={this.state.editing} 
+            toggleEdit={this.toggleEdit} 
+            currentProduct={this.state.currentProduct} />
         </div>
         <div className='dashboard list-wrap' >
           {viewInventory}

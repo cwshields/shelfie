@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Product extends Component {
   render() {
-    const { imgurl, productname, price, toggleEdit, deleteProduct, productId } = this.props
+    const { imgurl, productname, price, toggleEdit, deleteProduct, productId, product } = this.props;
     return (
       <div key={productId} className='flex-center'>
         <div className='product-group'>
@@ -12,7 +12,7 @@ export default class Product extends Component {
             <div>${price}</div>
           </div>
           <div className='btn-group'>
-            <button onClick={toggleEdit}>Edit</button>
+            <button onClick={() => toggleEdit(product)}>Edit</button>
             <button onClick={() => deleteProduct(productId)}>Delete</button>
           </div>
         </div>
